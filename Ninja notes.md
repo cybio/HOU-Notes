@@ -1,26 +1,6 @@
 ## 基于对象的函数式脚本语言JavaScript (Ninja note)
-#### 数组降序
-```JavaScript
-arr.sort(function(v1, v2) { return v2 - v1; });
-```
-#### 判断N个布尔值是否相等
-```JavaScript
-return arr.indexOf(!arr[0]) < 0;
-```
-#### 回文递归,判断字符串是否为回文
-```JavaScript
-function isPalindrome(text) {
-	if (text.length <= 1) return true;
-	if (text.charAt(0) != text.charAt(text.length - 1)) return false;
-	return isPalindrome(text.substr(1, text.length - 2));
-}
-```
-#### 将JS表达式转为等效的布尔值
-```
-!!"String" === true	// true
-!!0 === false	// true
-```
-### 函数
+
+#### 函数
 函数都有一个name属性,函数真正的名字是字面量名称,与赋值的变量无关  
 另外,一个命名函数声明在顶层,window对象上的同名属性会引用到该函数.
 ```JavaScript
