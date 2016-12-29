@@ -9,7 +9,7 @@ Git是一个专门做修改记录的程序, 在软件,程序设计的领域中�
 ## 安装Git
 
 - __Windows系统:__ 建议下载Github for Windows. 这个程序内包含Git在里面, 而且容易安装: [windows.github.com](windows.github.com). 
-- __Mac系统:__ 下载Github for Mac.里面也包含Git程序.[mac.github.com](mac.github.com) (必须到`Preferences`中选择`Install Command LIne Tools`). 或者直接下载安装Git主程序[git-scm.com/downloads](git-scm.com/downloads).
+- __Mac系统:__ 下载Github for Mac.里面也包含Git程序.[mac.github.com](mac.github.com) (必须到`Preferences`中选择`Install Command Line Tools`). 或者直接下载安装Git主程序[git-scm.com/downloads](git-scm.com/downloads).
 
 Git不像你电脑里的其他软件.你不会在桌面上看到一个软件图标,但你可以通过终端或是其他Git电脑程序(如Github for Mac 或 Github for Windows)来使用.
 
