@@ -254,3 +254,25 @@ isFinite(1e308);	// true
 isFinite(1e309);	// false
 ```
 
+* encodeURI(),encodeURIComponent()
+* decodeURI(),decodeURIComponent()
+
+在URL或URI中,有一些字符有特殊意义,需要encodeURI()转义,返回一个可用的URL, encodeURIComponent()会把参数当成是URL的一部分去转义,decodeURI(),decodeURIComponent()是它们的反转义函数
+
+```
+var url = 'http://www.abc.com/script.php?q=this and that';
+encodeURI(url);
+// 'http://www.abc.com/script.php?q=this%20and%20that'
+
+var url = 'http://abc.com/?q=this and that';
+encodeURIComponent(url);
+// 'http%3A%2F%2Fabc.com%2F%3Fq%3Dthis%20and%20that'
+```
+
+* eval() 将输入的字符串当作js代码来执行
+
+```
+eval('var a = 3;');
+a;	// 3
+```
+
