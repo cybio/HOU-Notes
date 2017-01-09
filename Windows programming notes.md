@@ -181,3 +181,88 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 ## 窗口与消息
 
+Windows程序是基于消息的,系统监听你对程序做出的动作(鼠标,键盘)事件,然后由Windows发送消息给程序,即Windows调用了程序的一个函数,这个函数是你写的,函数的参数描述了由Windows发送给程序的特定消息,这个函数就是回调函数"窗口过程".
+
+当Windows程序开始执行时,会创建一个"消息队列",Windows程序中一般都包含一小段称为"消息魂环"的代码,用于从消息队列中检索消息,并将其分发给相应的窗口过程.
+
+```C
+#include <windows.h>
+
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int iCmdShow)
+{
+	static TCHAR szAppName[] = TEXT("HelloWin");
+	HWND hwnd;
+	MSG msg;
+	WNDCLASS wndclass;
+
+	wndclass.style = CS_HREDRAW | CS_VREDRAW;
+	wndclass.lpfnWndProc = WndProc;
+	wndclass.cbClsExtra = 0;
+	wndclass.cbWndExtra = 0;
+	wndclass.hInstance = hInstance;
+	wndclass.hIcon = LoadIcon(NULL,	IDI_APPLICATION);
+	wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	wndclass.lpszMenuName = NULL;
+	wndclass.lpszClassName = szAppName;
+
+	if (!RegisterClass(&wndclass))
+	{
+		MessageBox(NULL, TEXT("This program requires Windows NT!"), szAppName, MB_ICONERROR);
+		return 0;
+	}
+
+	hwnd = CreateWindow(szAppName,					// window class name
+						TEXT("谈笑风生又一年"),	// window caption
+						WS_OVERLAPPEDWINDOW,		// window style
+						CW_USEDEFAULT,				// initial x position
+						CW_USEDEFAULT,				// initial y position
+						400,				// initial x size
+						300,				// initial y size
+						NULL,						// parent window handle
+						NULL,						// window menu handle
+						hInstance,					// program instance handle
+						NULL);						// creation parameters
+
+	ShowWindow(hwnd, iCmdShow);
+	UpdateWindow(hwnd);
+
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return msg.wParam;
+}
+
+LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	HDC hdc;
+	PAINTSTRUCT ps;
+	RECT rect;
+
+	switch (message)
+	{
+	case WM_CREATE:
+		PlaySound(TEXT("xxoo.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+		return 0;
+
+	case WM_PAINT:
+		hdc = BeginPaint(hwnd, &ps);
+		GetClientRect(hwnd, &rect);
+		DrawText(hdc, TEXT("JN 是智障"), -1, &rect,
+			DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+		EndPaint(hwnd, &ps);
+		return 0;
+
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;	
+	}
+
+	return DefWindowProc(hwnd, message, wParam, lParam);
+}
+```
