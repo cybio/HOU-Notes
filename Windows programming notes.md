@@ -185,7 +185,7 @@ Windows程序是基于消息的,系统监听你对程序做出的动作(鼠标,�
 
 当Windows程序开始执行时,会创建一个"消息队列",Windows程序中一般都包含一小段称为"消息魂环"的代码,用于从消息队列中检索消息,并将其分发给相应的窗口过程.
 
-```C
+```C++
 #include <windows.h>
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -253,7 +253,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
 		GetClientRect(hwnd, &rect);
-		DrawText(hdc, TEXT("JN 是智障"), -1, &rect,
+		DrawText(hdc, TEXT("这是一个基础窗口"), -1, &rect,
 			DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 		EndPaint(hwnd, &ps);
 		return 0;
