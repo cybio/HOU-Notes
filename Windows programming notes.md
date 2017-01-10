@@ -136,7 +136,7 @@ sprintf(szBuffer, "The sum of %i and %i is %i", 5, 3, 5 + 3);
 
 ##### 例子程序
 VS2015编译
-```
+```C
 #include <windows.h>
 #include <tchar.h>
 #include <stdio.h>
@@ -185,7 +185,7 @@ Windows程序是基于消息的,系统监听你对程序做出的动作(鼠标,�
 
 当Windows程序开始执行时,会创建一个"消息队列",Windows程序中一般都包含一小段称为"消息魂环"的代码,用于从消息队列中检索消息,并将其分发给相应的窗口过程.
 
-```C++
+```C
 #include <windows.h>
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -266,3 +266,147 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return DefWindowProc(hwnd, message, wParam, lParam);
 }
 ```
+
+窗口中标题栏和窗口边框之间的白色区域为"客户区"(client area)
+Windows程序员交流用语中称呼窗口过程为"win prock"
+
+##### 大写标识符前缀的意义
+
+前缀|说明|全名
+:-:|:-:|:-:
+CS|类样式选项|class style
+CW|创建窗口选项|create window
+DT|文本绘制选项|draw text
+IDI|图标ID号|ID Icon
+IDC|光标ID号|ID Cursor
+MB|消息框选项|message box
+SND|声音选项|sound
+WM|窗口消息|window message
+WS|窗口风格|window style
+
+##### 新的数据类型
+
+
+类型名|说明
+:-:|:-:
+UINT|unsigned int
+PSTR|char*
+WPARAM|unsigned int,unsigned short(win98)
+LPARAM|long
+LRESULT|long
+WINAPI|__stdcall
+CALLBACK|__stdcall
+MSG|消息结构
+WNDCLASS|窗口类结构
+PAINTSTRUCT|绘制结构
+RECT|矩形结构
+HINSTANCE|实例句柄--程序本身
+HWND|窗口句柄
+HDC|设备环境(上下文)句柄
+HICON|图标句柄
+HCURSOR|鼠标指针句柄
+HBRUSH|图形画刷句柄
+
+##### 匈牙利标记(命名)法
+
+前缀|数据类型
+:-:|:-:
+c|char,WCHAR,TCHAR
+by|byte
+n|short
+i|int
+x,y|int,x,y坐标
+cx,cy|int,x,y长度,c表示count
+B,f|BOOL(int),flag
+w|WORD,unsigned short
+l|long
+dw|DWORD,unsigned long
+fn|function
+s|string
+sz|string with '\0'
+h|handle
+p|point
+
+### 窗口类
+
+通常如下定义一个窗口类:
+
+    WNDCLASS wndclass;
+
+然后对该结构的10个字段初始化,并调用RegisterClass函数
+
+* 类样式
+
+    wndclass.style = CS_HREDRAW | CS_VREDRAW;
+
+所有CS前缀标识符如下:
+
+```
+#define CS_VREDRAW			0x0001
+#define CS_HREDRAW			0x0002
+#define CS_KEYCVTWINDOW		0x0004
+#define CS_DBLCLKS			0x0008
+#define CS_OWNDC			0x0020
+#define CS_CLASSDC			0x0040
+#define CS_PARENTDC			0x0080
+#define CS_NOKEYCVT			0x0100
+#define CS_NOCLOSE			0x0200
+#define CS_SAVEBITS			0x0800
+#define CS_BYTEALIGNCLIENT	0x1000
+#define CS_BYTEALIGNWINDOW	0x2000
+#define CS_GLOBALCLASS		0x4000
+#define CS_IME				0x00010000
+```
+
+* 设置窗口过程函数
+
+    wndclass.lpfnWndProc = WndProc;
+
+* 类结构和Windows内部维护的窗口结构中预留的额外空间:
+
+    wndclass.cbClsExtra = 0;
+    wndclass.cbWndExtra = 0;
+
+应用程序可以根据需要来使用这些额外的空间.
+
+* 实例句柄
+
+    wndclass.hInstance = hInstance;
+
+* 窗口图标
+
+    wndclass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+
+* 鼠标指针
+
+    wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
+
+* 客户区背景色
+
+    wndclass.hbrBackground = GetStockObject(WHITE_BRUSH);
+
+* 窗口的菜单
+
+    wndclass.lpszMenuName = NULL;
+
+* 窗口类名称
+
+    wndclass.lpszClassName = szAppName;
+
+当程序只创建一个窗口时,窗口类名称一般与程序名相同.
+
+#### 注册窗口类
+
+```
+// 如果注册失败, RegisterClass会返回0
+if (!RegisterClass(&wndclass))
+{
+    MessageBox(NULL, TEXT("Error info"), szAppName, MB_ICONERROR);
+    return 0;
+}
+```
+
+利用GetLastError函数可以获知函数调用错误的原因,返回错误代码,可以通过WINERROR.H查看.
+
+### 窗口的创建
+
