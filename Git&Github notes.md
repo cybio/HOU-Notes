@@ -6,12 +6,91 @@ Git是一个__开源软件__(完全免费), 作者是Linus Torvalds, 他也是Li
 
 Git是一个专门做修改记录的程序, 在软件,程序设计的领域中叫做__版本控制__.
 
+### 提交频率
+由于可以选择何时进行提交，因此，你可能想知道该多久提交一次更改。保持较小的提交通常是一个好做法。随着两个版本之间的差异越来越大，易于理解性和实用性都会越来越低。但是，你也不希望使提交过小。如果总是在每次更改一行代码后保存提交，则历史记录会因短时间内包含大量提交而变得难以读懂。
+
+__为每项逻辑更改进行一次提交__是很好的经验法则。例如，如果改正了一处打字错误，然后在文件的另一部分中改正了一个错误，则应为每项更改进行一次提交，因为这两项更改在逻辑上是独立的。如果这样做，每次提交都将具有一个易于理解的目的。Git 允许你在每次提交时都编写一条简短的信息来说明更改了什么。如果每次提交都包含一项逻辑更改，这条信息会更有用。
+
+### 主观判断
+选择何时提交是一种主观判断，而且不一定一成不变。在选择是否提交时，只需记住：每个提交都应具有一个清晰的逻辑目的，而且绝不应在不进行提交的情况下完成过多工作。
+
+```
+// 来自Uda的教程
+git log
+git log --stat   // 查看版本提交历史
+git log -n <数字> // 查看指定数字的提交个数
+git diff id1 id2 // 对比两个提交的不同 id可以只写前4个字符
+git clone https://github.com/username/code.git // 将代码库克隆到本地
+git config --global color.ui auto // 配置全局文本UI为彩色
+git checkout id // 检出(切换)一个版本
+git checkout master // 切换回主分支
+
+git init // 初始化一个仓库
+git status // 查看仓库状态
+
+git add <filename> // 将文件添加到暂存区
+git reset <filename> // 将文件从暂存区中移除
+
+git commit -m "Commit message" // 提交代码
+
+git diff // 对比工作目录和暂存区
+git diff --staged // 对比暂存区和代码库
+git reset --hard // 放弃工作目录和暂存区的所有更改
+
+git branch // 显示所在分支
+git branch <分支名> // 创建一个分支
+git checkout <分支名> // 切换分支
+
+git log --graph --oneline <master> <分支名> // 查看多分支图
+git checkout -b new_branch_name // 新建分支并直接切换
+git gc // 手动清理垃圾
+
+git merge <分支名> // 合并分支,并新建一个提交
+
+git remote // 查看远程代码库
+git remote add origin(默认名字写origin即可) url // 添加远程代码库
+git remote add upstream(习惯使用这个名字代表原始代码库) url // 添加远程原始代码库
+git remote -v // 显示远程代码库详细信息
+
+git push origin master // 将主分支推送到远程origin上
+
+git pull origin master // 将远程代码库拉回到本地主分支
+
+git fetch // 更新本地的origin/master分支
+
+git push origin :分支名 // 删除远程分支
+
+git config --system core.longpaths true // 为Windows设置长路径
+```
+
+### 生成SSH密钥
+```
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+#### Git的三大区域
+
+* 工作目录
+* 暂存区
+* 代码库
+
+#### 提交信息的标题
+
+* feat： 新功能
+* fix：错误修复
+* docs：文档修改
+* style：格式、分号缺失等，代码无变动
+* refactor：生产代码重构
+* test：测试添加、测试重构等，生产代码无变动
+* chore：构建任务更新、程序包管理器配置等，生产代码无变动。
+---
 ## 安装Git
 
 - __Windows系统:__ 建议下载Github for Windows. 这个程序内包含Git在里面, 而且容易安装: [windows.github.com](windows.github.com). 
 - __Mac系统:__ 下载Github for Mac.里面也包含Git程序.[mac.github.com](mac.github.com) (必须到`Preferences`中选择`Install Command Line Tools`). 或者直接下载安装Git主程序[git-scm.com/downloads](git-scm.com/downloads).
 
 Git不像你电脑里的其他软件.你不会在桌面上看到一个软件图标,但你可以通过终端或是其他Git电脑程序(如Github for Mac 或 Github for Windows)来使用.
+
 
 ## 设置Git
 
@@ -38,7 +117,7 @@ Git不像你电脑里的其他软件.你不会在桌面上看到一个软件图�
 ## 提交你的项目
 
 ```
-$ git status // 查看状态
+$ git status // 查看状态   
 $ git add <file>[ <file>...] // 添加需要Git管理的文件到暂存区
 $ git add .		// 添加新文件和修改的文件到暂存区,不包括删除的文件
 $ git add -A	// 添加所有变化到暂存区

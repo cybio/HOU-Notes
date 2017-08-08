@@ -214,17 +214,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine,
 		return 0;
 	}
 
-	hwnd = CreateWindow(szAppName,					// window class name
+	hwnd = CreateWindow(szAppName,	// window class name
 						TEXT("谈笑风生又一年"),	// window caption
-						WS_OVERLAPPEDWINDOW,		// window style
-						CW_USEDEFAULT,				// initial x position
-						CW_USEDEFAULT,				// initial y position
-						400,				// initial x size
-						300,				// initial y size
-						NULL,						// parent window handle
-						NULL,						// window menu handle
-						hInstance,					// program instance handle
-						NULL);						// creation parameters
+						WS_OVERLAPPEDWINDOW,	// window style
+						CW_USEDEFAULT,	// initial x position
+						CW_USEDEFAULT,	// initial y position
+						400,			// initial x size
+						300,			// initial y size
+						NULL,			// parent window handle
+						NULL,			// window menu handle
+						hInstance,		// program instance handle
+						NULL);			// creation parameters
 
 	ShowWindow(hwnd, iCmdShow);
 	UpdateWindow(hwnd);
