@@ -3,6 +3,8 @@
 [MDN HTML 元素参考(英)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)  
 [MDN HTML 元素参考(中)](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element)  
 [W3C 验证](https://validator.w3.org/)
+### 开发者工具DevTools
+Chrome (F12/Ctrl+Shift+I)
 
 ### 一个标准的 HTML5 文档
 ```
@@ -23,6 +25,9 @@
 </head>
 <body>
 ```
+* 用\<strong\>代替\<b\> __文本加粗__
+* 用\<em\>代替\<i\> _文本强调_
+* \<!-- ... --\>  HTML注释
 
 ###### 图像,按钮,标题,段落,引用
 ```
@@ -74,6 +79,21 @@ helloworld again.
   <img src="https://developer.cdn.mozilla.net/media/img/mdn-logo-sm.png" alt="An awesome picture">	
   <figcaption>Fig1. MDN Logo</figcaption>
 </figure>
+```
+
+###### 表单
+```
+<form action="xxx.php">
+	<label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+	<label><input type="radio" name="indoor-outdoor"> Outdoor</label>
+	<label><input type="checkbox" name="personality" checked> Loving</label>
+	<label><input type="checkbox" name="personality"> Lazy</label>
+	<label><input type="checkbox" name="personality"> Energetic</label>
+	<input type="text" placeholder="cat photo URL" required>
+
+	<input type="submit">
+	<button type="submit">Submit</button>
+</form>
 ```
 
 ###### HTML5 新标签
@@ -142,6 +162,16 @@ helloworld again.
 </body>
 </html>
 ```
+
+### 用语义化元素替代div
+* header
+* nav
+* article
+* aside
+* section
+* footer
+
+
 
 ### HTML5 Global attributes
 
