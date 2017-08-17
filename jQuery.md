@@ -8,6 +8,7 @@
     $("button").addClass("animated bounce"); // 动画回弹效果(需要Animate.css)
 	$(".well").addClass("animated shake");	// 动画抖动
 	$("#target3").addClass("animated fadeOut");	// 渐隐
+	$("body").addClass("animated hinge");	// 折叶效果
 
 	// 移除类
 	$("button").removeClass("btn-default");
@@ -28,6 +29,23 @@
 
 	// 移动元素
 	$("#target2").appendTo("#right-well");
+
+	// 元素复制拷贝
+	$("#target2").clone().appendTo("#right-well");
+
+	// 父元素
+	$("#target1").parent().css("background-color", "red");
+
+	// 子元素
+	$("#right-well").children().css("color", "orange");
+
+	// 选择子元素含有.target类的第N个元素
+	$(".target:nth-child(2)").addClass("animated bounce");
+	
+	// 选择奇数偶数的类
+	$(".target:odd").addClass("animated bounce");
+	$(".target:even").addClass("animated shake");
+
   });
 </script>
 ```

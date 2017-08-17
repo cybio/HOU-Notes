@@ -100,3 +100,9 @@ function isPalindrome(text) {
 !!0 === false	// true
 ```
 
+#### 随机数
+
+```
+Math.floor(Math.random() * (max - min + 1)) + min;	// 返回[min,max]之间的数
+```
+

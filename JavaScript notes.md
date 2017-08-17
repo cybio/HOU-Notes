@@ -136,6 +136,136 @@ var arr = new Array(1,2,3); // [1,2,3]
 arr[5] = 'newOne'; // [1,2,3,undefined * 2, 'newOne']
 ```
 
+### 数组常用操作
+
+```
+arr.length;			// 计算长度
+arr[arr.length - 1];	// 最后一个元素
+arr[arr.length - 3];	// 倒数第三个元素
+arr.push(4);	// 在数组末尾追加一个值,返回一个新长度
+arr.pop();		// 移除末尾最后一个元素,返回这个元素
+arr.shift();	// 移除第一个元素,返回这个元素
+arr.unshift(["Paul", 35]);	// 在数组开头追加元素,返回新的长度
+```
+
+### map
+```
+// 对数组中每一个元素执行给定的回调函数, 返回一个新数组, 不修改原数组
+var arr = [1, 2, 3, 4, 5];
+/*
+	回调函数参数说明
+	item 数组元素
+	index 数组索引
+	array 原始数组
+*/
+var res = arr.map(function(item, index, array) {
+	return item * 2;
+});
+alert(res); // 2, 4, 6, 8, 10
+```
+
+### reduce
+```
+对数组中每一个元素执行给定的回调函数  
+回调函数返回一个累积结果,在下次调用该回调函数时作为参数提供,
+方法返回最后一次回调函数的累积结果
+
+一维数组求和
+var arr = [1, 2, 3, 4, 5];
+var res = arr.reduce(function(prevResult, currItem, index, array) {
+	return prevResult + currItem;
+});
+alert(res); // 15
+
+//reduce第二个参数为prevResult初始值
+var arr = [1, 2, 3, 4, 5];
+var res = arr.reduce(function(prevResult, currItem, index, array) {
+	return prevResult + currItem;
+}, 5); //初始值设置为5
+alert(res); // 20 
+二维数组扁平化
+var arr = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
+var res = arr.reduce(function(prevResult, currItem, index, array) {
+	return prevResult.concat(currItem);
+});
+alert(res); // 1,2,3,4,5,6
+```
+
+### filter
+
+```
+对数组中每一个元素执行给定的回调函数  
+过滤符合条件的元素,返回一个新数组, 不修改原数组
+var arr = [1, 2, 3, 4, 5];
+var res = arr.filter(function(item, index, array) {
+	return item > 2;
+});
+alert(res);  //3, 4, 5
+```
+
+### sort
+
+```
+数组排序, 直接修改原数组, 默认使用字符串正序排序.
+var arr1 = [5, 2, 4, 1, 3];
+arr1.sort()
+alert(arr1); // 1 2 3 4 5
+var arr2 = [10, 5, 8, 1, 2];
+arr2.sort();
+alert(arr2); // 1 10 2 5 8
+
+如果想按数字排序,要自定义一个方法函数传入sort
+var arr = [5, 2, 4, 1, 3];
+var index = arr.sort(function(a, b) {
+	return a - b;
+});
+alert(index); // 1 2 3 4 5
+
+var index = arr.sort(function(a, b) {
+	return b - a;
+});
+alert(index); // 5 4 3 2 1
+```
+
+### reverse
+
+```
+反转数组元素, 直接修改原数组
+var arr1 = [1, 2, 3];
+arr1.reverse();
+alert(arr1); // 3 2 1
+```
+
+### concat
+
+```
+连接两个数组.不修改数组本身,返回一个连接后的新数组
+var arr1 = [1, 2, 3];
+var arr2 = [true, 4, 5];
+alert(arr1.concat(arr2)); //1 2 3 true 4 5
+```
+
+### split
+
+```
+用指定分隔符将字符串分割为数组
+var string = "Split me into an array";
+var array = [];
+array = string.split(" ");
+```
+
+### join
+
+```
+将数组用指定连接符组成一个字符串, 不修改原数组本身, 返回一个新的字符串
+var arr1 = [1, 2, 3];
+alert(arr1.join('-')); // 1-2-3
+```
+
 ##### 删除一个元素的值
 
 该方式不会改变数组的长度
@@ -162,6 +292,75 @@ var s = 'one';
 s[0];	// 'o'
 s[1];	// 'n'
 s[2];	// 'e'
+```
+
+## 对象
+
+```
+var obj = Object();
+var obj = {};
+obj.name = ‘xxx’;
+obj.year = 1940;
+
+var obj = {name:’xxx’, year:1940};
+var obj2 = {};
+obj2.someone = obj;
+alert(obj2.someone.name) // xxx
+
+var obj = {
+	1: "abc",
+	id: 9999,
+	"my dog": "duoduo",
+	"123abc": "xxx",
+};
+var num = 1;
+obj[num];	// "abc"
+obj["my dog"];	// "duoduo"
+obj.newProp = "the new";	// 给对象增加一个属性
+delete obj.newProp;			// 删除对象的属性
+
+obj.hasOwnProperty(checkProp); // 检查对象的属性是否存在,返回布尔值
+```
+
+### 构造函数创建对象
+
+```
+var Car = function() { // 注意构造函数变量首字母通常大写
+  this.wheels = 4;
+  this.engines = 1;
+  this.seats = 5;
+};
+/* 
+	使用new关键字调用构造函数创建一个新的对象实例
+	当myCar被创建以后,它可以像普通对象一样被使用
+*/
+var myCar = new Car();
+myCar.turboType = "twin";
+
+// 带参数的构造函数
+var Car = function(wheels, seats, engines) {
+  this.wheels = wheels;
+  this.seats = seats;
+  this.engines = engines;
+};
+
+var myCar = new Car(8, 2, 2);
+```
+
+### 类
+```
+var Bike = function() {
+ 
+  var gear; // 私有属性
+
+  this.getGear = function() {
+    return gear;
+  };
+  
+  this.setGear = function(count) {
+    gear = count;
+  };
+};
 ```
 
 ## 条件与循环
@@ -193,6 +392,21 @@ var ret = (a === 1) ? 'a is one' : 'a is not one';
 * for
 * for-in
 
+### 正则表达式
+```
+var str = "The dog chased the cat";
+/*
+	把要查找的字符串放在//之间
+	g表示全局,意味返回所有匹配而不仅仅是第一个
+	i表示忽略大小写
+	\d 数字选择器 /\d+/g 匹配一个或更多的数字
+	\s 空白选择器(" ",\t \f \r \n)
+	\S 任何非空白字符
+*/
+var exp = /the/gi;
+str.match(exp)	// 返回匹配的数组,没有匹配则返回null
+```
+
 ## 函数
 
 ```
@@ -212,6 +426,14 @@ args(1, 2, true, 'new'); // [1, 2, true, 'new']
 ```
 
 ### 预定义函数
+随机数
+```
+Math.random(); // 生成0(包括0)到1(不包括1)之间的随机小数
+Math.floor(); //向下取整,去掉小数部分
+Math.floor(Math.random() * 20); // 0~19
+Math.floor(Math.random() * (max - min + 1)) + min;	// 返回[min,max]之间的数 
+```
+
 
 * parseInt(), 将接受的到值(通常是字符串)转换成整数,失败返回NaN
 

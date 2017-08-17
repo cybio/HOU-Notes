@@ -39,6 +39,7 @@ class="btn btn-primary"
 btn-primary 深蓝色按钮,应用主要按钮
 btn-info	浅蓝色按钮,常用操作
 btn-danger	红色按钮,删除,提示危险操作等
+class="form-control"	// 表单控件类,修饰表单文本input
 
 Font Awesome图标库
 ```
