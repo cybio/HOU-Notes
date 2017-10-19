@@ -148,6 +148,48 @@ arr.shift();	// 移除第一个元素,返回这个元素
 arr.unshift(["Paul", 35]);	// 在数组开头追加元素,返回新的长度
 ```
 
+### splice
+删除/替换/插入, 直接修改原数组  
+```
+var arr = [1, 2, 3, 4, 5];
+//参数一,从哪个索引开始
+//参数二,切割多少个元素
+//参数三…参数N ,要在铰接处插入的元素
+arr.splice(1, 2, 3, 4, 5); //此时为1 3 4 5 4 5
+arr.splice(1, 3); //此时为1 4 5
+arr.splice(2, 0, true); //此时为 1 4 true 5
+```
+
+### slice
+截取子数组, 不修改原数组, 返回一个截取后的数组
+```
+var arr = [1, 2, 3, 4, 5];
+arr.slice(1, 4); //返回从索引1开始,到索引4(左闭右开区间,不包括结束索引)为2 3 4
+```
+
+### indexOf
+返回要查找的元素第一次出现所在的索引  
+```
+var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+var index = arr.indexOf(2);
+alert(index); // 1
+var index = arr.indexOf(2, 4); // 从索引4开始查找元素为2的索引
+alert(index); // 7
+```
+
+### lastIndexOf
+从尾部向头部查找,使用方法同indexOf  
+
+### forEach
+对数组中每一个元素执行给定的回调函数, 做一些动作, 无返回  
+```
+var arr = [1, 2, 3, 4, 5];
+arr.forEach(function(item, index, array) {
+	alert("index = " + index + ", item = " + item + ", array = " + array);
+});
+// 弹出5次指定格式的文本对话框
+```
+
 ### map
 ```
 // 对数组中每一个元素执行给定的回调函数, 返回一个新数组, 不修改原数组
@@ -194,6 +236,9 @@ var res = arr.reduce(function(prevResult, currItem, index, array) {
 });
 alert(res); // 1,2,3,4,5,6
 ```
+
+### reduceRight
+按倒序操作, 从右边累积, 方法同reduce
 
 ### filter
 
@@ -408,11 +453,31 @@ str.match(exp)	// 返回匹配的数组,没有匹配则返回null
 ```
 
 ## 函数
+函数总是返回一个值,即使没有指定return,它会返回一个undefined  
+arguments是实参,parameter是形参
 
+##### 提升
+即使函数的声明写在了调用的后面, 解释器会自动把声明提升到当前作用域的顶部,  
+注意,函数里的 _greeting_ 变量会发生提升,但是只是提升声明,赋值不会被提升  
+所以控制台上输出 _undefined_  
+__在脚本的顶部声明函数和变量，这样语法和行为就会相互保持一致。__
 ```
+sum(1, 2);	// 正常执行, 返回3
+
 function sum(a, b) {
+	console.log(greeting);	// 这里输出的是 undefined
+	var greeting = 'Hello';
 	return a + b;
 }
+```
+##### 函数表达式
+将一个函数赋值给一个变量, __注意函数表达式不会提升__  
+函数表达式：当将函数赋值给变量时，函数可以有名称，也可以是匿名的。 使用变量名称调用在函数表达式中定义的函数。
+```
+var func1 = function() { return 'hi'; };
+
+// 有名称的函数表达式,只能通过变量调用,即 func2()
+var func2 = function myHello() { return 'hello'; };
 ```
 
 ### arguments
@@ -426,6 +491,16 @@ args(1, 2, true, 'new'); // [1, 2, true, 'new']
 ```
 
 ### 预定义函数
+数字格式
+```
+123.4567.toFixed(2);	// "123.46"
+123.4550.toFixed(2);	// "123.45"
+123.4551.toFixed(2);	// "123.46"
+
+var a = 1234567;
+a.toLocaleString('en-US');	// 1,234,567
+```
+
 随机数
 ```
 Math.random(); // 生成0(包括0)到1(不包括1)之间的随机小数

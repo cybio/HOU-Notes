@@ -1,7 +1,7 @@
 # jQuery
 
 ### 选择器
-```
+```JavaScript
 <script>
   $(document).ready(function() {
 	// 添加类
@@ -48,4 +48,71 @@
 
   });
 </script>
+```
+
+## 追加元素
+```JavaScript
+$().append(element);	// 追加到所有子元素后面
+$().prepend(element);	// 追加到所有子元素前面
+```
+
+```
+$.toggleClass()	// 切换类
+$.next()			// 获取同级的下一个元素
+$.attr(attrStr)		// 或者元素某个属性值
+$.attr(attrStr, value) // 设置元素某个属性的值			
+$.css('font-size', '20px')	// 修改元素的CSS
+$.html()	// 获取选择器内的全部html内容
+$.html(content) // 设置选择器内的内容
+$.text()	// 同上 , 但只获取或设置选择器的文本内容
+$.val()		// 获取某元素value的值
+$.remove()	// 移除元素
+```
+
+```
+.insertBefore(target) 	// 把某内容插入到target之前
+.insertAfter(target)	// 把某内容插入到target之后
+.after(content)	// 在选择器之后插入内容
+```
+.each()
+```
+$( "li" ).each(function( index ) {
+  console.log( index + ": " + $( this ).text() );
+});
+```
+
+DOM加载完毕后自动执行函数
+```
+$(function() {
+	// do something
+});
+```
+monitorEvents() Chrome的事件检测器
+```
+// 在开发者工具中监测元素的事件
+monitorEvents(element);
+// 取消检测
+unmonitorEvents(element);
+```
+
+## 事件
+```
+$(element).on('click', function(event) {
+	// do something
+});
+
+// 简易方式
+$(element).click(function(event) {
+	// do something
+});
+```
+### 事件代理
+使用事件代理，我们将侦听点击父元素的事件， 并关注那些事件的目标。  
+jQuery 的事件代理使用我们一直在使用的相同代码，向 "on" 方法另外又传递了一个参数。  
+即使有1000个li,也不必为每个li元素添加监听了,   
+使用 jQuery 的事件代理仅在一个 元素 (ul#rooms) 上设置事件侦听器并检查目标元素是否为列表项
+```
+$( '#rooms' ).on( 'click', 'li', function() {
+    ...
+});
 ```

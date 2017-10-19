@@ -51,7 +51,7 @@ helloworld again.
 <a href=”xxx.html” title="title" target="_blank">this is a link.</a>
 ```
 
-###### 无序列表,有序列表
+###### 无序列表,有序列表,定义列表
 ```
 <ol>
 	<li>有序列表项</li>
@@ -65,6 +65,24 @@ helloworld again.
 	<li>无序列表项</li>
 	<li>无序列表项</li>
 </ul>
+
+<dl>
+    <dt>title</dt>
+    <dd>描述</dd>
+    <dd>描述</dd>
+    <dd>描述</dd>
+    <dd>描述</dd>
+    <dt>title</dt>
+    <dd>wudi01</dd>
+    <dd>wudi02</dd>
+    <dd>wudi03</dd>
+    <dd>wudi04</dd>
+    <dt>3title</dt>
+    <dd>wudi01</dd>
+    <dd>wudi02</dd>
+    <dd>wudi03</dd>
+    <dd>wudi04</dd>
+</dl>
 ```
 
 ###### 图
@@ -79,6 +97,33 @@ helloworld again.
   <img src="https://developer.cdn.mozilla.net/media/img/mdn-logo-sm.png" alt="An awesome picture">	
   <figcaption>Fig1. MDN Logo</figcaption>
 </figure>
+```
+
+###### 表格
+```
+    <table>
+        <caption>蘑菇王国的居民</caption>
+        <thead>
+            <tr>
+              <th>Variety</th>
+              <th>Color</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>Fuji</td>
+              <td>Red blush, yellow stripes, green</td>
+            </tr>
+            <tr>
+              <td>Gala</td>
+              <td>Red-orange, yellow stripes</td>
+            </tr>
+            <tr>
+              <td>Golden Delicious</td>
+              <td>Yellow-green</td>
+            </tr>
+        </tbody>
+    </table>
 ```
 
 ###### 表单

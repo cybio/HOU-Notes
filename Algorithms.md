@@ -91,6 +91,19 @@ function isPalindrome(text) {
 	if (text.charAt(0) != text.charAt(text.length - 1)) return false;
 	return isPalindrome(text.substr(1, text.length - 2));
 }
+
+function palindrome(str) {  
+  str = str.toLowerCase().match(/[a-z0-9]+/gi).join("");
+
+  console.log(str);
+  if (str.length <= 1) return true;
+  
+  for (var i = 0; i < Math.floor(str.length / 2); i++) {
+    if (str.charAt(i) != str.charAt(str.length - (i + 1))) return false;
+  }
+  
+  return true; 
+}
 ```
 
 #### 将JS表达式转为等效的布尔值
